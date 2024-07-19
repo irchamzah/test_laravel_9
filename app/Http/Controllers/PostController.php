@@ -37,17 +37,23 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
             'date' => 'required|date',
-            'username' => 'required',
+            'username' => 'required|string'
         ]);
 
-        Post::create($request->all());
+        // Create a new post
+        Post::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'date' => $request->date,
+            'username' => $request->username // This will automatically be filled with logged-in user's username
+        ]);
 
-        return redirect()->route('posts.index')
-            ->with('success', 'Post created successfully.');
+        return redirect()->route('posts.index')->with('success', 'Post created successfully.');
     }
+
 
     /**
      * Display the specified resource.
