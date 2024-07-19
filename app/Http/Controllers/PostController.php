@@ -25,7 +25,6 @@ class PostController extends Controller
             $sortDirection = 'asc';
         }
 
-        // Paginate the posts
         $perPage = 4;
         $posts = Post::orderBy($sortField, $sortDirection)->paginate($perPage);
 
@@ -60,12 +59,12 @@ class PostController extends Controller
             'username' => 'required|string'
         ]);
 
-        // Create a new post
+
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'date' => now(), // Mengisi field date dengan waktu saat ini
-            'username' => $request->username // Ini akan otomatis terisi dengan username pengguna yang sedang login
+            'date' => now(),
+            'username' => $request->username
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');

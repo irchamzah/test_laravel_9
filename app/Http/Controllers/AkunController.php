@@ -11,7 +11,6 @@ class AkunController extends Controller
 {
     public function __construct()
     {
-        // Terapkan middleware admin ke seluruh metode
         $this->middleware('admin');
     }
 

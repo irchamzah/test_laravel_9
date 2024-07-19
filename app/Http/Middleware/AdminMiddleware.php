@@ -21,7 +21,6 @@ class AdminMiddleware
             return $next($request);
         }
 
-        // Redirect jika pengguna bukan admin
         return redirect('/')->with('error', 'You do not have admin access.');
     }
 }
