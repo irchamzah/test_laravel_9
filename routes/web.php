@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 // Public routes
-// Public routes
 Route::get('/', [BerandaController::class, 'index']);
 Route::get('/home', [BerandaController::class, 'index'])->name('home');
 

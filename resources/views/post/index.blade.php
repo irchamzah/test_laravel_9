@@ -50,7 +50,7 @@
             <tr>
                 <td>{{ $i++ }}</td>
                 <td>{{ $post->title }}</td>
-                <td>{{ $post->content }}</td>
+                <td>{!! $post->content !!}</td>
                 <td>{{ $post->date }}</td>
                 <td>{{ $post->username }}</td>
                 <td>

@@ -7,22 +7,18 @@
         @csrf
         <div class="form-group">
             <label for="title">Title:</label>
-            <input type="text" class="form-control" id="title" name="title">
+            <input type="text" class="form-control" id="title" name="title" required>
         </div>
         <div class="form-group">
             <label for="content">Content:</label>
             <textarea class="form-control" id="content" name="content"></textarea>
         </div>
         <div class="form-group">
-            <label for="date">Date:</label>
-            <input type="datetime-local" class="form-control" id="date" name="date">
-        </div>
-        <div class="form-group">
             <label for="username">Username:</label>
             <input type="text" class="form-control" id="username" name="username" value="{{ Auth::user()->username }}"
                 readonly>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary mt-3">Submit</button>
     </form>
 </div>
 @endsection

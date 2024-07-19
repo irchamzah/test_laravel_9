@@ -12,7 +12,7 @@
     </nav>
 
     <h1>{{ $post->title }}</h1>
-    <p>{{ $post->content }}</p>
+    <p>{!! $post->content !!}</p>
     <small>Posted by {{ $post->username }} on {{ $post->date }}</small>
 
     <!-- Update and Delete Buttons -->

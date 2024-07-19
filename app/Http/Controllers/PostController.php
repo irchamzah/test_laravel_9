@@ -57,7 +57,6 @@ class PostController extends Controller
         $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'date' => 'required|date',
             'username' => 'required|string'
         ]);
 
@@ -65,8 +64,8 @@ class PostController extends Controller
         Post::create([
             'title' => $request->title,
             'content' => $request->content,
-            'date' => $request->date,
-            'username' => $request->username // This will automatically be filled with logged-in user's username
+            'date' => now(), // Mengisi field date dengan waktu saat ini
+            'username' => $request->username // Ini akan otomatis terisi dengan username pengguna yang sedang login
         ]);
 
         return redirect()->route('posts.index')->with('success', 'Post created successfully.');
@@ -107,18 +106,24 @@ class PostController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
-            'date' => 'required|date',
-            'username' => 'required',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'username' => 'required|string',
         ]);
 
         $post = Post::find($id);
-        $post->update($request->all());
+
+        $post->update([
+            'title' => $request->title,
+            'content' => $request->content,
+            'date' => now(),
+            'username' => $request->username
+        ]);
 
         return redirect()->route('posts.index')
             ->with('success', 'Post updated successfully.');
     }
+
 
     /**
      * Remove the specified resource from storage.

@@ -17,6 +17,9 @@
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 
+    <!-- CKEditor -->
+    <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+
     <!-- Styles -->
     <style>
         html,
@@ -128,6 +131,11 @@
 
     <!-- Scripts -->
     @vite(['resources/js/app.js'])
+
+    <!-- Initialize CKEditor -->
+    <script>
+        CKEDITOR.replace('content');
+    </script>
 </body>
 
 </html>
