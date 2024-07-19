@@ -16,6 +16,31 @@
 
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
+
+    <!-- Styles -->
+    <style>
+        html,
+        body {
+            height: 100%;
+            margin: 0;
+        }
+
+        #app {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 1rem;
+        }
+    </style>
 </head>
 
 <body>
@@ -88,7 +113,21 @@
         <main class="py-4">
             @yield('content')
         </main>
+
+        <!-- Footer -->
+        <footer class="bg-white text-center shadow">
+            <div class="container justify-content-between d-flex">
+                <p class="mb-0">&copy; My Company {{ date('Y') }}</p>
+                <p class="mb-0">
+                    <span href="#">Powered by</span>
+                    <a href="#">Laravel Framework</a>
+                </p>
+            </div>
+        </footer>
     </div>
+
+    <!-- Scripts -->
+    @vite(['resources/js/app.js'])
 </body>
 
 </html>

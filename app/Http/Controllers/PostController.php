@@ -12,10 +12,28 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-        return view('post.index', compact('posts'));
+        $sortField = $request->input('sort', 'created_at');
+        $sortDirection = $request->input('direction', 'asc');
+        $allowedFields = ['title', 'content', 'date', 'username', 'created_at'];
+
+        if (!in_array($sortField, $allowedFields)) {
+            $sortField = 'created_at';
+        }
+        if (!in_array($sortDirection, ['asc', 'desc'])) {
+            $sortDirection = 'asc';
+        }
+
+        // Paginate the posts
+        $perPage = 4;
+        $posts = Post::orderBy($sortField, $sortDirection)->paginate($perPage);
+
+        return view('post.index', [
+            'posts' => $posts,
+            'sortField' => $sortField,
+            'sortDirection' => $sortDirection,
+        ]);
     }
 
     /**
