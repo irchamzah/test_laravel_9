@@ -18,13 +18,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Auth routes
-Auth::routes();
-
 // Public routes
 Route::get('/', [BerandaController::class, 'index']);
 Route::get('/home', [BerandaController::class, 'index'])->name('home');
-Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
+Route::get('/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 
 // Authentication routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -32,22 +29,11 @@ Route::post('login', [LoginController::class, 'login']);
 Route::post('logout', [LoginController::class, 'logout'])->name('logout');
 
 // Protected routes
-Route::middleware(['auth'])->group(function () {
-    Route::get('posts', [PostController::class, 'index'])->name('posts.index');
-    Route::get('posts/create', [PostController::class, 'create'])->name('posts.create');
-    Route::post('posts', [PostController::class, 'store'])->name('posts.store');
-    Route::get('posts/{post}', [PostController::class, 'show'])->name('posts.show');
-    Route::get('posts/{post}/edit', [PostController::class, 'edit'])->name('posts.edit');
-    Route::put('posts/{post}', [PostController::class, 'update'])->name('posts.update');
-    Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('posts.destroy');
+Route::prefix('auth')->middleware('auth')->group(function () {
+    Route::resource('posts', PostController::class)->except('show');
 });
 
+
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('akun', [AkunController::class, 'index'])->name('akun.index');
-    Route::get('akun/create', [AkunController::class, 'create'])->name('akun.create');
-    Route::post('akun', [AkunController::class, 'store'])->name('akun.store');
-    Route::get('akun/{akun}', [AkunController::class, 'show'])->name('akun.show');
-    Route::get('akun/{akun}/edit', [AkunController::class, 'edit'])->name('akun.edit');
-    Route::put('akun/{akun}', [AkunController::class, 'update'])->name('akun.update');
-    Route::delete('akun/{akun}', [AkunController::class, 'destroy'])->name('akun.destroy');
+    Route::resource('akun', AkunController::class);
 });
