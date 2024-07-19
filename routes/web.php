@@ -24,7 +24,7 @@ Auth::routes();
 // Public routes
 // Public routes
 Route::get('/', [BerandaController::class, 'index']);
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [BerandaController::class, 'index'])->name('home');
 
 // Authentication routes
 Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');

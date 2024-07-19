@@ -20,7 +20,8 @@
     @endif
 
     <!-- Display pagination information -->
-    Menampilkan {{ $posts->firstItem() }}-{{ $posts->lastItem() }} dari {{ $posts->total() }} item.
+    Menampilkan <span class="fw-bold">{{ $posts->firstItem() }}-{{ $posts->lastItem() }}</span> dari <span
+        class="fw-bold">{{ $posts->total() }}</span> item.
 
     <table class="table table-bordered">
         <thead>
@@ -53,13 +54,16 @@
                 <td>{{ $post->date }}</td>
                 <td>{{ $post->username }}</td>
                 <td>
-                    <form action="{{ route('posts.destroy', $post->idpost) }}" method="POST">
-                        <a class="btn btn-info" href="{{ route('posts.show', $post->idpost) }}">Show</a>
-                        <a class="btn btn-primary" href="{{ route('posts.edit', $post->idpost) }}">Edit</a>
+                    <a class="btn btn-info" href="{{ route('posts.show', $post->idpost) }}">Show</a>
+                    @if (Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->username ===
+                    $post->username))
+                    <a class="btn btn-primary" href="{{ route('posts.edit', $post->idpost) }}">Edit</a>
+                    <form action="{{ route('posts.destroy', $post->idpost) }}" method="POST" style="display:inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Delete</button>
                     </form>
+                    @endif
                 </td>
             </tr>
             @endforeach
